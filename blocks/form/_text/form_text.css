@@ -1,0 +1,21 @@
+.form_text{
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 29px;
+    color: #000000;
+    margin: 0;
+    margin-bottom: 54px;
+    align-self: flex-start;
+    margin-left: 36px;
+    margin-top: 25px;
+}
+
+@media (max-width: 470px){
+    .form_text{
+        margin-left: 22px;
+        font-size: 18px;
+        line-height: 22px;
+    }
+}

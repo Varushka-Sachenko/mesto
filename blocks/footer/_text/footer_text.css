@@ -1,18 +1,17 @@
-.profile_status{
+.footer_text{
     font-family: Inter;
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
     line-height: 22px;
-    color: #FFFFFF;
-    margin: 0;
-    margin-top: 16px;
+
+    color: #545454;
+
 }
 
 @media screen and (max-width: 879px){
-    .profile_status{
+    .footer_text{
         font-size: 14px;
-        line-height: 17px;
+    line-height: 17px;
     }
-
 }

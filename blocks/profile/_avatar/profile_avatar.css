@@ -1,0 +1,10 @@
+.profile_avatar{
+    align-self: center;
+    justify-self: start;
+}
+
+@media screen and (max-width: 879px){
+    .profile_avatar{
+        justify-self: center;
+    }
+}

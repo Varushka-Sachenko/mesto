@@ -1,0 +1,14 @@
+.form_close-button{
+    width: 40px;
+    margin-top: -40px;
+    align-self: flex-end;
+    margin-right: -40px;
+}
+
+@media (max-width: 470px){
+    .form_close-button{
+        margin-right: 0;
+        width: 26px;
+        margin-top: -51px;
+    }
+}
