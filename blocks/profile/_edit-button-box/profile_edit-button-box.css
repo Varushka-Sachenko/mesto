@@ -9,6 +9,11 @@
     height: 24px;
 }
 
+.profile_edit-button-box:hover{
+    opacity: 0.6;
+    transition: opasity 3s;
+}
+
 @media screen and (max-width: 879px){
     .profile_edit-button-box{
         margin-right: 13.25px;

@@ -9,6 +9,11 @@
     align-self: center;
 }
 
+.profile_add-button-box:hover{
+    opacity: 0.6;
+    transition: opasity 3s;
+}
+
 @media screen and (max-width: 879px){
     .profile_add-button-box{
         justify-self: center;

@@ -22,6 +22,7 @@
 @import url(../blocks/element/_image/element_image.css);
 @import url(../blocks/element/_info/element_info.css);
 @import url(../blocks/element/_title/element_title.css);
+@import url(../blocks/element/_like-button/element_like-button.css);
 
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/_text/footer_text.css);

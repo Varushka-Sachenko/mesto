@@ -13,6 +13,10 @@
     margin-top: 18px;
 }
 
+.form_save-button:hover{
+    opacity: 0.8;
+}
+
 @media (max-width: 470px){
     .form_save-button{
         max-width: 238px;

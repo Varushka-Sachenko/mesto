@@ -6,21 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mesto</title>
     <link rel="stylesheet" href="pages/index.css">
+   
 </head>
 <body>
     <div class="page">
         <header class="header">
             <img class="header_logo" src="images/header_logo.svg" alt="Логотип">
         </header>
-        <main class="content">
+        <main class="main">
             <section class="profile">
                 <img class="profile_avatar" src="images/Avatar.svg" alt="Аватар">
                 <div class="profile_info">
-                    <p class="profile_name">Жак-Ив Кусто </p>    
+                    <p class="profile_name" id="profile_name">Жак-Ив Кусто</p>    
                     <div class="profile_edit-button-box">
-                        <input class="profile_edit-button" type="image" src="images/edit-part.svg" alt="Кнопка редактирования">
+                        <a href="#form"><input class="profile_edit-button" type="image" src="images/edit-part.svg" alt="Кнопка редактирования"></a>
+                        
                     </div> 
-                    <p class="profile_status">Исследователь океана</p>
+                    <p class="profile_status" id="profile_status">Исследователь океана.</p>
                 </div>
                 <div class="profile_add-button-box">
                     <input class="profile_add-button" type="image" src="images/add-part.svg" alt="Кнопка добавления">
@@ -34,37 +36,65 @@
                     <img class="element_image" src="images/kirill-pershin-1088404-kamchatka.jpg" alt="Изображение места">
                     <div class="element_info">
                         <p class="element_title">Карачаевск</p>
-                        <input class="profile_add-button" type="image" src="images/like-button.svg" alt="Кнопка лайк">
+                        <input class="element_like-button" type="image" src="images/like-button.svg" alt="Кнопка лайк">
                     </div>
                 </div>
                 <div class="element">
                     <img class="element_image" src="images/kirill-pershin-elbrus.jpg" alt="Изображение места">
                     <div class="element_info">
                         <p class="element_title">Гора Эльбрус</p>
-                        <input class="profile_add-button" type="image" src="images/like-button.svg" alt="Кнопка лайк">
+                        <input class="element_like-button" type="image" src="images/like-button.svg" alt="Кнопка лайк">
                     </div>
                 </div>
                 <div class="element">
                     <img class="element_image" src="images/kirill-pershin-1556355-dombai.jpg" alt="Изображение места">
                     <div class="element_info">
                         <p class="element_title">Домбай</p>
-                        <input class="profile_add-button" type="image" src="images/like-button.svg" alt="Кнопка лайк">
+                        <input class="element_like-button" type="image" src="images/like-button.svg" alt="Кнопка лайк">
+                    </div>
+                </div>
+                <div class="element">
+                    <img class="element_image" src="images/kirill-pershin-1088404-kamchatka.jpg" alt="Изображение места">
+                    <div class="element_info">
+                        <p class="element_title">Карачаевск</p>
+                        <input class="element_like-button" type="image" src="images/like-button.svg" alt="Кнопка лайк">
                     </div>
                 </div>
                 <div class="element">
                     <img class="element_image" src="images/kirill-pershin-1556355-dombai.jpg" alt="Изображение места">
                     <div class="element_info">
-                        <p class="element_title">Домбай</p>
-                        <input class="profile_add-button" type="image" src="images/like-button.svg" alt="Кнопка лайк">
+                        <p class="element_title">Карачаево-Черкессия</p>
+                        <input class="element_like-button" type="image" src="images/like-button.svg" alt="Кнопка лайк">
+                    </div>
+                </div>
+                <div class="element">
+                    <img class="element_image" src="images/kirill-pershin-elbrus.jpg" alt="Изображение места">
+                    <div class="element_info">
+                        <p class="element_title">Гора Эльбрус</p>
+                        <input class="element_like-button" type="image" src="images/like-button.svg" alt="Кнопка лайк">
                     </div>
                 </div>
             </section>
+            <section class="content" id="form">
+                <div class="form" >
+                    <a href="#"><input class="form_close-button" type="image" src="images/Close Icon.svg" alt="Кнопка закрыть"></a>
+                    <p class="form_text">Редактировать профиль</p>
+                    <form class="form_field" name="test" method="post" action="">
+                        <input class="form_field-text" type="text" size="40" name="username" id="username" value="Жак-Ив Кусто">
+                    </form>
+                    <form class="form_field" name="test" method="post" action="">
+                        <input class="form_field-text" type="text" size="40" name="status" id="status" value="Исследователь океана.">
+                    </form>
+                    <button type="submit" class="form_save-button" id="form_save-button">Сохранить</button>
+                </div>
+            </section>
+           
     
         </main>
         <footer class="footer">
             <p class="footer_text">© 2020 Mesto Russia</p>
         </footer>
     </div>
-    
+    <script src="script.js"></script>   
 </body>
 </html>

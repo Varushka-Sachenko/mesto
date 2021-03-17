@@ -1,6 +1,15 @@
 .content{
     background-color: rgba(0, 0, 0, .5);  
-    display: flex;
+    display: none;
     justify-content: center;
-    height: 100vh;
+    position: absolute;
+    width: 100%;
+
+    position: fixed;
+    height: 100%;
+    top: 0;
+}
+
+.content:target{
+    display: flex;
 }
