@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mesto</title>
     <link rel="stylesheet" href="pages/index.css">
-   
+
 </head>
+
 <body>
     <div class="page">
         <header class="header">
@@ -17,23 +19,25 @@
             <section class="profile">
                 <img class="profile_avatar" src="images/Avatar.svg" alt="Аватар">
                 <div class="profile_info">
-                    <h1 class="profile_name" id="profile_name">Жак-Ив Кусто</h1>    
+                    <h1 class="profile_name" id="profile_name">Жак-Ив Кусто</h1>
                     <div class="profile_edit-button-box">
-                        <a href="#form"><input class="profile_edit-button" type="image" src="images/edit-part.svg" alt="Кнопка редактирования"></a>
-                        
-                    </div> 
+                        <a href="#form"><input class="profile_edit-button" type="image" src="images/edit-part.svg"
+                                alt="Кнопка редактирования"></a>
+
+                    </div>
                     <p class="profile_status" id="profile_status">Исследователь океана.</p>
                 </div>
                 <div class="profile_add-button-box">
                     <input class="profile_add-button" type="image" src="images/add-part.svg" alt="Кнопка добавления">
                 </div>
-                
-    
-    
+
+
+
             </section>
             <section class="elements">
                 <div class="element">
-                    <img class="element_image" src="images/kirill-pershin-1088404-kamchatka.jpg" alt="Изображение места">
+                    <img class="element_image" src="images/kirill-pershin-1088404-kamchatka.jpg"
+                        alt="Изображение места">
                     <div class="element_info">
                         <p class="element_title">Карачаевск</p>
                         <input class="element_like-button" type="image" src="images/like-button.svg" alt="Кнопка лайк">
@@ -54,7 +58,8 @@
                     </div>
                 </div>
                 <div class="element">
-                    <img class="element_image" src="images/kirill-pershin-1088404-kamchatka.jpg" alt="Изображение места">
+                    <img class="element_image" src="images/kirill-pershin-1088404-kamchatka.jpg"
+                        alt="Изображение места">
                     <div class="element_info">
                         <p class="element_title">Карачаевск</p>
                         <input class="element_like-button" type="image" src="images/like-button.svg" alt="Кнопка лайк">
@@ -76,25 +81,29 @@
                 </div>
             </section>
             <section class="content" id="form">
-                <div class="form" >
-                    <a href="#"><input class="form_close-button" type="image" src="images/Close Icon.svg" alt="Кнопка закрыть"></a>
+                <div class="form">
+                    <a href="#"><input class="form_close-button" type="image" src="images/Close Icon.svg"
+                            alt="Кнопка закрыть"></a>
                     <p class="form_text">Редактировать профиль</p>
                     <form class="form_field" name="test" method="post" action="">
-                        <input class="form_field-text" type="text" size="40" name="username" id="username" value="Жак-Ив Кусто">
+                        <input class="form_field-text" type="text" size="40" name="username" id="username"
+                            value="Жак-Ив Кусто">
                     </form>
                     <form class="form_field" name="test" method="post" action="">
-                        <input class="form_field-text" type="text" size="40" name="status" id="status" value="Исследователь океана.">
+                        <input class="form_field-text" type="text" size="40" name="status" id="status"
+                            value="Исследователь океана.">
                     </form>
                     <button type="submit" class="form_save-button" id="form_save-button">Сохранить</button>
                 </div>
             </section>
-           
-    
+
+
         </main>
         <footer class="footer">
             <p class="footer_text">© 2020 Mesto Russia</p>
         </footer>
     </div>
-    <script src="script.js"></script>   
+    <script src="script.js"></script>
 </body>
+
 </html>
