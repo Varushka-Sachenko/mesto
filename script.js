@@ -7,9 +7,7 @@ let formElement = document.querySelector('.form__fields');
 // Находим поля формы в DOM
 let nameInput = formElement.querySelector('.form__name')// Воспользуйтесь инструментом .querySelector()
 let jobInput = formElement.querySelector('.form__job')// Воспользуйтесь инструментом .querySelector()
-console.log(nameInput);
 let save = formElement.querySelector('.form__save-button');
-console.log(save);
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
 function formSubmitHandler (evt) {
@@ -19,7 +17,6 @@ function formSubmitHandler (evt) {
 
     // Получите значение полей jobInput и nameInput из свойства value
     let username = nameInput.value;
-    console.log(username);
     let status = jobInput.value;
     // Выберите элементы, куда должны быть вставлены значения полей
     let name = document.querySelector('.profile__name');
