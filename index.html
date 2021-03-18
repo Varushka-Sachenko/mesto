@@ -13,18 +13,18 @@
 <body>
     <div class="page">
         <header class="header">
-            <img class="header__logo" src="images/header__logo.svg" alt="Логотип">
+            <img class="header__logo" src="images/header_logo.svg" alt="Логотип">
         </header>
         <main class="main">
             <section class="profile">
                 <img class="profile__avatar" src="images/Avatar.svg" alt="Аватар">
                 <div class="profile__info">
                     <h1 class="profile__name" id="profile__name">Жак-Ив Кусто</h1>
-                    <div class="profile__edit-button-box">
-                        <a href="#form" target="_self"><input class="profile__edit-button" type="image" src="images/edit-part.svg"
+                    <a class="profile__edit-button-box" target="_self">
+                        <input class="profile__edit-button" type="image" src="images/edit-part.svg"
                                 alt="Кнопка редактирования"></a>
 
-                    </div>
+
                     <p class="profile__status" id="profile__status">Исследователь океана.</p>
                 </div>
                 <div class="profile__add-button-box">
@@ -80,20 +80,20 @@
                     </div>
                 </div>
             </section>
-            <section class="content" id="form">
+            <section class="content">
                 <div class="form">
                     <a href="#" target="_self"><input class="form__close-button" type="image" src="images/Close Icon.svg"
                             alt="Кнопка закрыть"></a>
                     <p class="form__text">Редактировать профиль</p>
-                    <form class="form__field" name="test" method="post" action="">
-                        <input class="form__field-text" type="text" size="40" name="username" id="username"
+                    <form class="form__fields" name="test" method="post" action="">
+                        <input class="form__field-text form__name" type="text" size="40" name="username" 
                             value="Жак-Ив Кусто">
-                    </form>
-                    <form class="form__field" name="test" method="post" action="">
-                        <input class="form__field-text" type="text" size="40" name="status" id="status"
+                
+                        <input class="form__field-text form__job" type="text" size="40" name="status" 
                             value="Исследователь океана.">
+                         <button type="submit" class="form__save-button" id="form__save-button">Сохранить</button>
                     </form>
-                    <button type="submit" class="form__save-button" id="form__save-button">Сохранить</button>
+                    
                 </div>
             </section>
 
