@@ -1,5 +1,5 @@
 .profile__status{
-    font-family: Inter;
+    font-family: 'Inter', Arial, sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
@@ -7,14 +7,16 @@
     color: #FFFFFF;
     margin: 0;
     margin-top: 16px;
-    width: 336px;
+    width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 90%;
 }
 
 @media screen and (max-width: 879px){
     .profile__status{
         font-size: 14px;
         line-height: 17px;
-        
     }
-
 }

@@ -20,16 +20,10 @@
                 <img class="profile__avatar" src="images/Avatar.svg" alt="Аватар">
                 <div class="profile__info">
                     <h1 class="profile__name" id="profile__name">Жак-Ив Кусто</h1>
-                    <a class="profile__edit-button-box" target="_self">
-                        <input class="profile__edit-button" type="image" src="images/edit-part.svg"
-                                alt="Кнопка редактирования"></a>
-
-
+                    <button class="profile__edit-button-box" type="button"></button>
                     <p class="profile__status" id="profile__status">Исследователь океана.</p>
                 </div>
-                <div class="profile__add-button-box">
-                    <input class="profile__add-button" type="image" src="images/add-part.svg" alt="Кнопка добавления">
-                </div>
+                <button class="profile__add-button-box" type="button"></button>
 
 
 
@@ -39,63 +33,60 @@
                     <img class="element__image" src="images/kirill-pershin-1088404-kamchatka.jpg"
                         alt="Изображение места">
                     <div class="element__info">
-                        <p class="element__title">Карачаевск</p>
-                        <input class="element__like-button" type="image" src="images/like-button.svg" alt="Кнопка лайк">
+                        <h2 class="element__title">Карачаевск</h2>
+                        <button class="element__like-button" type="button"></button>
                     </div>
                 </div>
                 <div class="element">
                     <img class="element__image" src="images/kirill-pershin-elbrus.jpg" alt="Изображение места">
                     <div class="element__info">
-                        <p class="element__title">Гора Эльбрус</p>
-                        <input class="element__like-button" type="image" src="images/like-button.svg" alt="Кнопка лайк">
+                        <h2 class="element__title">Гора Эльбрус</h2>
+                        <button class="element__like-button" type="button"></button>
                     </div>
                 </div>
                 <div class="element">
                     <img class="element__image" src="images/kirill-pershin-1556355-dombai.jpg" alt="Изображение места">
                     <div class="element__info">
-                        <p class="element__title">Домбай</p>
-                        <input class="element__like-button" type="image" src="images/like-button.svg" alt="Кнопка лайк">
+                        <h2 class="element__title">Домбай</h2>
+                        <button class="element__like-button" type="button"></button>
                     </div>
                 </div>
                 <div class="element">
                     <img class="element__image" src="images/kirill-pershin-1088404-kamchatka.jpg"
                         alt="Изображение места">
                     <div class="element__info">
-                        <p class="element__title">Карачаевск</p>
-                        <input class="element__like-button" type="image" src="images/like-button.svg" alt="Кнопка лайк">
+                        <h2 class="element__title">Карачаевск</h2>
+                        <button class="element__like-button" type="button"></button>
                     </div>
                 </div>
                 <div class="element">
                     <img class="element__image" src="images/kirill-pershin-1556355-dombai.jpg" alt="Изображение места">
                     <div class="element__info">
-                        <p class="element__title">Карачаево-Черкессия</p>
-                        <input class="element__like-button" type="image" src="images/like-button.svg" alt="Кнопка лайк">
+                        <h2 class="element__title">Карачаево-Черкессия</h2>
+                        <button class="element__like-button" type="button"></button>
                     </div>
                 </div>
                 <div class="element">
                     <img class="element__image" src="images/kirill-pershin-elbrus.jpg" alt="Изображение места">
                     <div class="element__info">
-                        <p class="element__title">Гора Эльбрус</p>
-                        <input class="element__like-button" type="image" src="images/like-button.svg" alt="Кнопка лайк">
+                        <h2 class="element__title">Гора Эльбрус</h2>
+                        <button class="element__like-button" type="button"></button>
                     </div>
                 </div>
             </section>
-            <section class="content">
-                <div class="form">
-                    <a href="#" target="_self"><input class="form__close-button" type="image" src="images/Close Icon.svg"
-                            alt="Кнопка закрыть"></a>
-                    <p class="form__text">Редактировать профиль</p>
-                    <form class="form__fields" name="test" method="post" action="">
-                        <input class="form__field-text form__name" type="text" size="40" name="username" 
-                            value="Жак-Ив Кусто">
-                
-                        <input class="form__field-text form__job" type="text" size="40" name="status" 
-                            value="Исследователь океана.">
-                         <button type="submit" class="form__save-button" id="form__save-button">Сохранить</button>
-                    </form>
-                    
-                </div>
-            </section>
+            <div class="popup">
+                <form class="form" name="test" method="post">
+                    <button class="form__close-button" type="button"></button>
+                    <h2 class="form__text">Редактировать профиль</h2>
+                    <input class="form__field-text form__field-text_name" type="text" size="40" name="username"
+                        value="Жак-Ив Кусто">
+
+                    <input class="form__field-text form__field-text_job" type="text" size="40" name="status"
+                        value="Исследователь океана.">
+                    <button type="submit" class="form__save-button">Сохранить</button>
+                </form>
+
+            </div>
 
 
         </main>
@@ -103,7 +94,7 @@
             <p class="footer__text">© 2020 Mesto Russia</p>
         </footer>
     </div>
-    <script src="script.js"></script>
+    <script src="scripts/script.js"></script>
 </body>
 
 </html>

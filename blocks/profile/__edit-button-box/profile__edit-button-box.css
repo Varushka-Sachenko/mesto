@@ -6,11 +6,17 @@
     display: flex;
     justify-content: center;
     height: 24px;
+    background-image: url(../../../images/edit-button1.svg);
+    padding: 0;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    background-position: center;
+    cursor: pointer;
 }
 
 .profile__edit-button-box:hover{
     opacity: 0.6;
-    transition: opasity 3s;
+    transition: opacity .3s;
 }
 
 @media screen and (max-width: 879px){

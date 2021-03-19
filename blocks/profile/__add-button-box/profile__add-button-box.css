@@ -7,11 +7,16 @@
     display: flex;
     justify-content: center;
     align-self: center;
+    background-image: url(.././../../images/add-button2.svg);
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
 }
 
 .profile__add-button-box:hover{
     opacity: 0.6;
-    transition: opasity 3s;
+    transition: opacity .3s;
 }
 
 @media screen and (max-width: 879px){

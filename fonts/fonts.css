@@ -13,19 +13,12 @@
   src: local("Inter"),
   url("static/Inter-Regular.ttf") format("truetype");
 }  
+ 
 
 @font-face{
   font-family: "Inter";
   font-style: normal;
-	font-weight: bold;
-  src: local("Inter"),
-  url("static/Inter-Bold.ttf") format("truetype");
-}  
-
-@font-face{
-  font-family: "Inter";
-  font-style: normal;
-	font-weight: medium;
+	font-weight: 500;
   src: local("Inter"),
   url("static/Inter-Medium.ttf") format("truetype");
 } 

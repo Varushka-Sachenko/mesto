@@ -2,7 +2,7 @@
     background-color: black;
     width: 358px;
     height: 50px;
-    font-family: Inter;
+    font-family: 'Inter', Arial, sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
@@ -10,11 +10,14 @@
     text-align: center;
     color: #FFFFFF;
     margin: 0 auto;
-    margin-top: 18px;
+    margin-top: 5px;
+    margin-bottom: 37px;
+    border: none;
 }
 
 .form__save-button:hover{
     opacity: 0.8;
+    transition: opacity .3s;
 }
 
 @media (max-width: 470px){
@@ -22,5 +25,6 @@
         max-width: 238px;
         font-size: 14px;
         line-height: 17px;
+        margin-top: 15px;
     }
 }

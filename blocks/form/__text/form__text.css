@@ -1,5 +1,5 @@
 .form__text{
-    font-family: Inter;
+    font-family: 'Inter', Arial, sans-serif;
     font-style: normal;
     font-weight: 900;
     font-size: 24px;
@@ -16,5 +16,6 @@
         margin-left: 22px;
         font-size: 18px;
         line-height: 22px;
+        margin-bottom: 75px;
     }
 }

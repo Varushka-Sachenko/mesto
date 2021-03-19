@@ -1,4 +1,4 @@
-.content{
+.popup{
     background-color: rgba(0, 0, 0, .5);
     display: none;
     justify-content: center;
@@ -7,3 +7,4 @@
     height: 100%;
     top: 0;
 }
+
