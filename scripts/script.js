@@ -1,9 +1,9 @@
 
 let all = document.querySelector('.popup');
-let formElement = document.querySelector('.form');
 
-let nameInput = formElement.querySelector('.form__field-text_name')
-let jobInput = formElement.querySelector('.form__field-text_job')
+let formElement = document.querySelector('.form');
+let nameInput = formElement.querySelector('.form__field-text_input_name')
+let jobInput = formElement.querySelector('.form__field-text_input_job')
 
 
 
@@ -15,10 +15,8 @@ let closButton = all.querySelector('.form__close-button');
 let edit = document.querySelector('.profile__edit-button-box');
 
 function popupOpened() {
-    nameInput.value = name.innerText
-    console.log(name.innerText);
-    jobInput.value = job.innerText
-    console.log(job.innerText);
+    nameInput.value = name.textContent
+    jobInput.value = job.textContent
     all.classList.add('popup_opened');
 
 }
