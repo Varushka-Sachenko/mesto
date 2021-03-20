@@ -11,7 +11,7 @@ let jobInput = formElement.querySelector('.form__field-text_input_job')
 let name = document.querySelector('.profile__name');
 let job = document.querySelector('.profile__status');
 
-let closButton = all.querySelector('.form__close-button');
+let closButton = all.querySelector('.popup__close-button');
 let edit = document.querySelector('.profile__edit-button-box');
 
 function popupOpened() {
