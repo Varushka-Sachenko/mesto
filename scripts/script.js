@@ -151,8 +151,7 @@ function addSubmitHandler(evt) {
   let title = elTempCont.querySelector('.element__title')
   let imgLink = elTempCont.querySelector('.element__image')
 
-  titleFill = titleInput.value;
-  title.textContent = titleFill;
+  title.textContent = titleInput.value;
 
   link = linkInput.value;
   imgLink.src = link
