@@ -6,14 +6,10 @@
     width: 25px;
     background-color: white;
     cursor: pointer;
+    outline: none;
 }
 
 .element__like-button:hover{
     opacity: 0.5;
 }
 
-.element__like-button:active{
-    background-image: url(../../../images/like_active.svg);
-    background-repeat: no-repeat;
-    background-position: center;
-}

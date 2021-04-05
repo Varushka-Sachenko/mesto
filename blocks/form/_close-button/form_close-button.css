@@ -1,0 +1,21 @@
+.form_close-button{
+    width: 40px;
+    position: absolute;
+    top: -40px;
+    right: -40px;
+}
+
+.form_close-button:hover{
+    opacity: 0.6;
+    transition: opasity 3s;
+}
+
+
+@media (max-width: 470px){
+    .form_close-button{
+        margin-right: 0;
+        width: 26px;
+        top: -26px;
+        right: 0;
+    }
+}
