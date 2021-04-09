@@ -1,35 +1,38 @@
 
-let all_edit = document.querySelector('.popup_field_edit');
 
-let formEdit = document.querySelector('.form_field_edit');
-let nameInput = formEdit.querySelector('.form__field-text_input_name')
-let jobInput = formEdit.querySelector('.form__field-text_input_job')
+const allEditPopup = document.querySelector('.popup_field_edit');
 
-let all_add = document.querySelector('.popup_field_add');
+const formFieldEdit = document.querySelector('.form_field_edit');
+const formFieldTextInputName = formFieldEdit.querySelector('.form__field-text_input_name')
+const formFieldTextInputJob = formFieldEdit.querySelector('.form__field-text_input_job')
 
-let formAdd = document.querySelector('.form_field_add');
-let titleInput = formAdd.querySelector('.form__field-text_input_title')
-let linkInput = formAdd.querySelector('.form__field-text_input_link')
+const allAddPopup = document.querySelector('.popup_field_add');
+
+const formFieldAdd = document.querySelector('.form_field_add');
+
+const titleAddInput = allAddPopup.querySelector('.form__field-text_input_title')
+const linkAddInput = allAddPopup.querySelector('.form__field-text_input_link')
 
 
 // Выберите элементы, куда должны быть вставлены значения полей
-let name = document.querySelector('.profile__name');
-let job = document.querySelector('.profile__status');
+const profileName = document.querySelector('.profile__name');
+const profileStatus = document.querySelector('.profile__status');
 
-let closButton = all_edit.querySelector('.popup__close-button');
-let addClosButton = all_add.querySelector('.popup__close-button');
+const closButton = allEditPopup.querySelector('.popup__close-button');
+const addClosButton = allAddPopup.querySelector('.popup__close-button');
 
-let edit = document.querySelector('.profile__edit-button-box');
+const editBox = document.querySelector('.profile__edit-button-box');
 
-let add = document.querySelector('.profile__add-button-box');
+const addBox = document.querySelector('.profile__add-button-box');
 
-let elements = document.querySelector('.elements');
-let page = document.querySelector('.page');
+const elements = document.querySelector('.elements');
+const page = document.querySelector('.page');
 
 
-let elTempCont = document.getElementById('elemTemp').content
+const elementTemplateContent = document.getElementById('elemTemp').content
 
-let imagePopup = document.getElementById('imagePopup').content
+const imagePopup = document.getElementById('imagePopup').content
+
 
 const initialCards = [
   {
@@ -57,38 +60,34 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }];
 
+
+
+
 //Добавление начальных карточек
 for (i in initialCards) {
 
-  let elTemp = elTempCont.querySelector('.element').cloneNode(true);
-  let title = elTemp.querySelector('.element__title')
-  let imgLink = elTemp.querySelector('.element__image')
-  // console.log(initialCards[i].name)
-  title.textContent = initialCards[i].name
-  //console.log(initialCards[i].name)
-  //console.log(title)
-  imgLink.src = initialCards[i].link
+  elementTemplateClone = createCard(initialCards[i].name, initialCards[i].link)
 
-  elTemp.querySelector('.element__like-button').addEventListener('click', function (evt) {
+  elementTemplateClone.querySelector('.element__like-button').addEventListener('click', function (evt) {
     evt.target.classList.toggle('element__like-button_active');
   });
 
   // выберем кнопку удаления
-  const deleteButton = elTemp.querySelector('.element__delete-button');
+  const deleteButton = elementTemplateClone.querySelector('.element__delete-button');
   // добавим обработчик
   deleteButton.addEventListener('click', function () {
     const card = deleteButton.closest('.element');
     card.remove();
   });
 
-  const image = elTemp.querySelector('.element__image');
+  const image = elementTemplateClone.querySelector('.element__image');
   //Открытие картинки
   image.addEventListener('click', function () {
-    let locImagePopup = imagePopup.querySelector('.image-popup').cloneNode(true);
-    closIm = image.closest('.element__image')
+    const locImagePopup = imagePopup.querySelector('.image-popup').cloneNode(true);
+    closestImage = image.closest('.element__image')
 
-    closTit = elTemp.querySelector('.element__title')
-    locImagePopup.querySelector('.image-popup__image').src = closIm.src
+    closTit = elementTemplateClone.querySelector('.element__title')
+    locImagePopup.querySelector('.image-popup__image').src = closestImage.src
     locImagePopup.querySelector('.image-popup__title').textContent = closTit.textContent
 
     page.append(locImagePopup)
@@ -104,77 +103,53 @@ for (i in initialCards) {
 
 
 
-  elements.prepend(elTemp)
+  elements.prepend(elementTemplateClone)
 }
 
-// Открыть редактирование профиля
-function editPopupOpened() {
-  nameInput.value = name.textContent
-  jobInput.value = job.textContent
-  all_edit.classList.add('popup_opened');
 
-}
 
-//Закрыть редактирование
-function editIsClose() {
-  all_edit.classList.remove('popup_opened');
-}
 
 //Редактировать профиль
 function formSubmitHandler(evt) {
   evt.preventDefault();
-  name.textContent = nameInput.value;
-  job.textContent = jobInput.value;
-  editIsClose()
+  profileName.textContent = formFieldTextInputName.value;
+  profileStatus.textContent = formFieldTextInputJob.value;
+  closePopup(allEditPopup, formFieldTextInputName, formFieldTextInputJob)
 }
 
 //Открыть добавление
-function addPopupOpened() {
-  title = titleInput.value
-  link = linkInput.value
-  all_add.classList.add('popup_opened');
+
+function createCard(title, link) {
+  const elementTemplateClone = elementTemplateContent.querySelector('.element').cloneNode(true);
+  const elementTitle = elementTemplateClone.querySelector('.element__title')
+  const imageLink = elementTemplateClone.querySelector('.element__image')
+  elementTitle.textContent = title;
+  imageLink.src = link
+  return (elementTemplateClone)
 }
 
-//Закрыть добавление
-function addIsClose() {
-  all_add.classList.remove('popup_opened');
-  title = titleInput.value
-  link = linkInput.value
-}
 
 //Добавить карточку
 function addSubmitHandler(evt) {
   evt.preventDefault();
 
-  let elTemp = document.getElementById('elemTemp')
-  let elTempCont = elTemp.content;
-  let title = elTempCont.querySelector('.element__title')
-  let imgLink = elTempCont.querySelector('.element__image')
 
-  title.textContent = titleInput.value;
+  const elementTemplateClone = createCard(titleAddInput.value, linkAddInput.value)
 
-  link = linkInput.value;
-  imgLink.src = link
-  elTempCont.querySelector('.element__like-button').addEventListener('click', function (evt) {
+  // Лайк картинки
+  elementTemplateClone.querySelector('.element__like-button').addEventListener('click', function (evt) {
     evt.target.classList.toggle('element__like-button_active');
-    console.log('like')
   });
 
-  const deleteButton = elTempCont.querySelector('.element__delete-button');
-  // добавим обработчик
-  deleteButton.addEventListener('click', function () {
-    const card = deleteButton.closest('.element');
-    card.remove();
-  });
 
-  const image = elTempCont.querySelector('.element__image');
+  const image = elementTemplateClone.querySelector('.element__image');
   //Открытие картинки
   image.addEventListener('click', function () {
-    let locImagePopup = imagePopup.querySelector('.image-popup').cloneNode(true);
-    
-    let closIm = image.closest('.element__image')
-    locImagePopup.querySelector('.image-popup__image').src = closIm.src
-    locImagePopup.querySelector('.image-popup__title').textContent = title.textContent
+    const locImagePopup = imagePopup.querySelector('.image-popup').cloneNode(true);
+
+    const closestImage = image.closest('.element__image')
+    locImagePopup.querySelector('.image-popup__image').src = closestImage.src
+    locImagePopup.querySelector('.image-popup__title').textContent = elementTitle.textContent
 
     page.append(locImagePopup)
     locImagePopup.classList.add('popup_opened')
@@ -186,34 +161,36 @@ function addSubmitHandler(evt) {
     })
 
   });
-  
 
-  elements.prepend(elTempCont)
-  addIsClose()
+  //Удалить карточку
+  const deleteButton = elementTemplateClone.querySelector('.element__delete-button');
+  deleteButton.addEventListener('click', function () {
+    const card = deleteButton.closest('.element');
+    card.remove();
+    console
+  });
+
+  elements.prepend(elementTemplateClone)
+  closePopup(allAddPopup, titleAddInput, linkAddInput)
 }
 
-//Удалить карточку
-function deletElem() {
-  print(123245)
-  const card = deletButton.closest('.element');
-  card.remove();
+
+function openPopup(popupName) {
+  popupName.classList.add('popup_opened');
 }
 
-let deletButton = elements.querySelector('.element__delete-button');
-deletButton.addEventListener('click', function (evt) {
-  // в переменной eventTarget окажется элемент
-  // button, на который мы кликнули
-  const eventTarget = evt.target;
-  console.log(eventTarget)
-});
+
+function closePopup(popupName, field1, field2) {
+  popupName.classList.remove('popup_opened');
+  field1.value = ""
+  field2.value = ""
+}
 
 
+formFieldEdit.addEventListener('submit', formSubmitHandler);
+editBox.addEventListener('click', function () { openPopup(allEditPopup) });
+closButton.addEventListener('click', function () { closePopup(allEditPopup, formFieldTextInputName, formFieldTextInputJob) });
 
-
-formEdit.addEventListener('submit', formSubmitHandler);
-edit.addEventListener('click', editPopupOpened);
-closButton.addEventListener('click', editIsClose);
-
-add.addEventListener('click', addPopupOpened);
-formAdd.addEventListener('submit', addSubmitHandler);
-addClosButton.addEventListener('click', addIsClose);
+addBox.addEventListener('click', function () { openPopup(allAddPopup) });
+formFieldAdd.addEventListener('submit', addSubmitHandler);
+addClosButton.addEventListener('click', function () { closePopup(allAddPopup, titleAddInput, linkAddInput) });
