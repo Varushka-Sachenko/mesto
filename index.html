@@ -24,9 +24,6 @@
                     <p class="profile__status" id="profile__status">Исследователь океана.</p>
                 </div>
                 <button class="profile__add-button-box" type="button"></button>
-
-
-
             </section>
             <section class="elements">
                 <template id="elemTemp">
@@ -39,16 +36,7 @@
                         </div>
                     </div>
                 </template>
-                <template id="imagePopup">
-                    <div class="image-popup">
-                        <div class="popup__container">
-                            <img class="image-popup__image">
-                            <button class="popup__close-button"></button>
-                            <h3 class="image-popup__title"></h3>
-                        </div>
-                        
-                    </div>
-                </template>
+                
             </section>
             <div class="popup popup_field_edit">
                 <div class="popup__container">
@@ -70,13 +58,22 @@
                     <form class="form form_field_add" name="test" method="post">
                         <h2 class="form__text">Новое место</h2>
                         <input class="form__field-text form__field-text_input_title" placeholder="Название" type="text" size="40"
-                            name="username">
+                            name="username" value="">
 
-                        <input class="form__field-text form__field-text_input_link" placeholder="Ссылка на картинку" type="text" size="40" name="status">
+                        <input class="form__field-text form__field-text_input_link" placeholder="Ссылка на картинку" 
+                        type="text" size="40" name="status" value="">
                         <button type="submit" class="form__save-button">Сохранить</button>
                     </form>
                 </div>
 
+            </div>
+             <div class="image-popup">
+                <div class="popup__container">
+                    <img class="image-popup__image">
+                    <button class="popup__close-button"></button>
+                    <h3 class="image-popup__title"></h3>
+                </div>
+                    
             </div>
 
         </main>
