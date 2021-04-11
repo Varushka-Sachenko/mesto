@@ -1,4 +1,3 @@
-
 const popupEditProfile = document.querySelector('.popup_field_edit');
 
 const formFieldEdit = document.querySelector('.form_field_edit');
@@ -31,7 +30,6 @@ const elementTemplateContent = document.getElementById('elemTemp').content
 const popupImage = document.querySelector('.image-popup')
 
 const popupImageCloseButton = popupImage.querySelector('.popup__close-button')
-
 
 const initialCards = [
   {
@@ -75,7 +73,7 @@ function formEditProfileSubmitHandler(evt) {
 }
 
 popupImageCloseButton.addEventListener('click', function () {
-    closePopup(popupImage)
+  closePopup(popupImage)
 })
 
 //Открыть добавление
@@ -132,16 +130,19 @@ function closePopup(popupName) {
 }
 
 formFieldEdit.addEventListener('submit', formEditProfileSubmitHandler);
-editBox.addEventListener('click', function () { 
-  openPopup(popupEditProfile)});
-closButton.addEventListener('click', function () { closePopup(popupEditProfile) 
+editBox.addEventListener('click', function () {
+  openPopup(popupEditProfile)
+});
+closButton.addEventListener('click', function () {
+  closePopup(popupEditProfile)
   formFieldTextInputName.value = profileName.textContent
   formFieldTextInputJob.value = profileStatus.textContent
 });
 
-addBox.addEventListener('click', function () { openPopup(popupAddCard)
+addBox.addEventListener('click', function () {
+  openPopup(popupAddCard)
   titleAddInput.value = ""
-  linkAddInput.value = "" 
+  linkAddInput.value = ""
 });
 formFieldAdd.addEventListener('submit', formAddCardSubmitHandler);
 addClosButton.addEventListener('click', function () { closePopup(popupAddCard) });
