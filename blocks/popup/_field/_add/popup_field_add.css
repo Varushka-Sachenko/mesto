@@ -1,6 +1,5 @@
 .popup_field_add{
     background-color: rgba(0, 0, 0, .5);
-    display: flex;
     visibility: hidden;
     justify-content: center;
     width: 100%;
