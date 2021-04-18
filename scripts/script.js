@@ -15,7 +15,7 @@ const linkAddInput = popupAddCard.querySelector('.form__field-text_input_link')
 const profileName = document.querySelector('.profile__name');
 const profileStatus = document.querySelector('.profile__status');
 
-const closButton = popupEditProfile.querySelector('.popup__close-button');
+const closeEditProfileBtn = popupEditProfile.querySelector('.popup__close-button');
 const addClosButton = popupAddCard.querySelector('.popup__close-button');
 
 const editBox = document.querySelector('.profile__edit-button-box');
@@ -30,6 +30,10 @@ const elementTemplateContent = document.getElementById('elemTemp').content
 const popupImage = document.querySelector('.image-popup')
 
 const popupImageCloseButton = popupImage.querySelector('.popup__close-button')
+
+const titlePopupImage = popupImage.querySelector('.image-popup__title')
+
+const popup = document.querySelector('.popup');
 
 const initialCards = [
   {
@@ -81,23 +85,26 @@ popupImageCloseButton.addEventListener('click', function () {
 function createCard(title, link) {
   const elementTemplateClone = elementTemplateContent.querySelector('.element').cloneNode(true);
   const elementTitle = elementTemplateClone.querySelector('.element__title')
-  const imageLink = elementTemplateClone.querySelector('.element__image')
+  const image = elementTemplateClone.querySelector('.element__image')
+  const imagePopupImage = popupImage.querySelector('.image-popup__image')
+
   elementTitle.textContent = title;
-  imageLink.src = link
+  image.src = link
+  image.alt = title
 
   //Лайк картинки
   elementTemplateClone.querySelector('.element__like-button').addEventListener('click', function (evt) {
     evt.target.classList.toggle('element__like-button_active');
   });
 
-  const image = elementTemplateClone.querySelector('.element__image');
   //Открытие картинки
   image.addEventListener('click', function () {
     // const closestImage = popupImage.closest('.element__image')
     // console.log(closestImage)
-    popupImage.querySelector('.image-popup__image').src = image.src
-    popupImage.querySelector('.image-popup__image').alt = "Изображение места"
-    popupImage.querySelector('.image-popup__title').textContent = elementTitle.textContent
+    imagePopupImage.src = image.src
+    imagePopupImage.alt = elementTitle.textContent
+
+    titlePopupImage.textContent = elementTitle.textContent
     openPopup(popupImage)
     //Закрытие картинки
 
@@ -123,20 +130,61 @@ function formAddCardSubmitHandler(evt) {
 
 function openPopup(popupName) {
   popupName.classList.add('popup_opened');
+  enableValidation({
+    formSelector: '.form',
+    inputSelector: '.form__field-text',
+    submitButtonSelector: '.form__save-button',
+    inactiveButtonClass: 'form__save-button_inactive',
+    inputErrorClass: 'form__field-text_error',
+    errorClass: 'form__input-error_active'
+  });
+
+  popupName.addEventListener('click', function (e) {
+    if (e.target.className.indexOf('popup ') !== -1) {
+      popupName = document.querySelector('.popup_opened')
+      closePopup(popupName)
+    }
+  })
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key == "Escape") {
+      popupName = document.querySelector('.popup_opened')
+      closePopup(popupName)
+    }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key == "Escape") {
+      popupName = document.querySelector('.popup_opened')
+      closePopup(popupName)
+    }
+  });
 }
+
 
 function closePopup(popupName) {
   popupName.classList.remove('popup_opened');
+
+  document.removeEventListener('keydown', function (e) {
+    if (e.key == "Escape") {
+      popupName = document.querySelector('.popup_opened')
+      closePopup(popupName)
+    }
+  });
+
 }
+
+
 
 formFieldEdit.addEventListener('submit', formEditProfileSubmitHandler);
 editBox.addEventListener('click', function () {
-  openPopup(popupEditProfile)
-});
-closButton.addEventListener('click', function () {
-  closePopup(popupEditProfile)
+
   formFieldTextInputName.value = profileName.textContent
   formFieldTextInputJob.value = profileStatus.textContent
+  openPopup(popupEditProfile)
+});
+closeEditProfileBtn.addEventListener('click', function () {
+  closePopup(popupEditProfile)
 });
 
 addBox.addEventListener('click', function () {
@@ -144,5 +192,6 @@ addBox.addEventListener('click', function () {
   titleAddInput.value = ""
   linkAddInput.value = ""
 });
+
 formFieldAdd.addEventListener('submit', formAddCardSubmitHandler);
 addClosButton.addEventListener('click', function () { closePopup(popupAddCard) });

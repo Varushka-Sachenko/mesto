@@ -11,6 +11,7 @@
     height: 27px;
     padding: 0;
     margin-bottom: 43px;
+    outline: none;
 }
 
 @media (max-width: 470px){
