@@ -26,7 +26,7 @@ const enableValidation = (classes) => {
 
     const hideInputError = (formElement, inputElement) => {
         const errorElement = formElement.querySelector(`.${inputElement.id}-error`);// span
-        console.log(inputElement)
+        
         inputElement.classList.remove(classes.inputErrorClass);
         errorElement.classList.remove(classes.errorClass);
         errorElement.textContent = '';
