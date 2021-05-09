@@ -20,27 +20,39 @@ class Card {
 		return this._element
 	}
 
+	_likeCard (evt){
+		evt.target.classList.toggle('element__like-button_active');
+	}
+
+	_deleteCard(evt){
+		const card = evt.target.closest('.element');
+     	card.remove();
+	}
+
+	_openImage(){
+		const popupImage = document.querySelector('.image-popup')
+		const imagePopupImage = popupImage.querySelector('.image-popup__image')
+		const titlePopupImage = popupImage.querySelector('.image-popup__title')
+		imagePopupImage.src = this._link
+		imagePopupImage.alt = "Изображение " + this._title;
+
+		titlePopupImage.textContent = this._title
+		this.openPopup(popupImage)
+	}
+
 	_setEventListeners() {
-		const deleteButton = this._element.querySelector('.element__delete-button')
-		deleteButton.addEventListener('click', (evt) => {
-			const card = deleteButton.closest('.element');
-     		card.remove();
+		this._deleteButton = this._element.querySelector('.element__delete-button')
+		this._deleteButton.addEventListener('click', (evt) => {
+			this._deleteCard(evt)
 		});
   
 		this._likeButton = this._element.querySelector('.element__like-button')
 		this._likeButton.addEventListener('click', (evt) => {
-			evt.target.classList.toggle('element__like-button_active');
+			this._likeCard (evt)
 		});
 		
 		this._element.querySelector('.element__image').addEventListener('click', () => {
-			const popupImage = document.querySelector('.image-popup')
-			const imagePopupImage = popupImage.querySelector('.image-popup__image')
-			const titlePopupImage = popupImage.querySelector('.image-popup__title')
-			imagePopupImage.src = this._link
-			imagePopupImage.alt = "Изображение " + this._title;
-
-			titlePopupImage.textContent = this._title
-			this.openPopup(popupImage)
+			this._openImage()
 		});
 	  }
 	//здесь будут другие методы
@@ -48,46 +60,3 @@ class Card {
 
 export default Card
 
-// class Card {
-//     constructor (title, link){
-
-//     }
-
-//     createCard(title, link) {
-//         const elementTemplateClone = elementTemplateContent.querySelector('.element').cloneNode(true);
-//         const elementTitle = elementTemplateClone.querySelector('.element__title')
-//         const image = elementTemplateClone.querySelector('.element__image')
-//         const imagePopupImage = popupImage.querySelector('.image-popup__image')
-      
-//         elementTitle.textContent = title;
-//         image.src = link
-//         image.alt = title
-      
-//         //Лайк картинки
-//         elementTemplateClone.querySelector('.element__like-button').addEventListener('click', function (evt) {
-//           evt.target.classList.toggle('element__like-button_active');
-//         });
-      
-//         //Открытие картинки
-//         image.addEventListener('click', function () {
-//           // const closestImage = popupImage.closest('.element__image')
-//           imagePopupImage.src = image.src
-//           imagePopupImage.alt = elementTitle.textContent
-      
-//           titlePopupImage.textContent = elementTitle.textContent
-//           openPopup(popupImage)
-//           //Закрытие картинки
-      
-//         });
-      
-//         //Удалить карточку
-//         const deleteButton = elementTemplateClone.querySelector('.element__delete-button');
-//         deleteButton.addEventListener('click', function () {
-//           const card = deleteButton.closest('.element');
-//           card.remove();
-//         });
-      
-//         return (elementTemplateClone)
-//       }
-
-// }

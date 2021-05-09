@@ -37,7 +37,7 @@ const popupImageCloseButton = popupImage.querySelector('.popup__close-button')
 
 const titlePopupImage = popupImage.querySelector('.image-popup__title')
 
-// const popup = document.querySelector('.popup_field_edit');
+
 
 //Добавление начальных карточек
 initialCards.forEach( function (item, i, arr) {
@@ -56,8 +56,10 @@ const validationConfig = {
 } 
 
 
+
+
 function handleESC(evt) {
-    if (evt.key == "Escape") {
+    if (evt.key === "Escape") {
 
       // popupName = document.querySelector('.popup_opened')
       closePopup(document.querySelector('.popup_opened'))
@@ -101,16 +103,10 @@ function formAddCardSubmitHandler(evt) {
 }
 
 function openPopup(popupName) {
-  
   popupName.classList.add('popup_opened');
   popupName.addEventListener('click',  checkPopup);
   document.addEventListener('keydown',  handleESC); 
   
-  if (popupName.querySelector('.form')){
-    //console.log(popupName.querySelector('.form'))
-    const validation = new FormValidator(validationConfig, popupName.querySelector('.form'))
-    validation.enableValidation()
-  }
 }
 
 
@@ -129,6 +125,7 @@ editBox.addEventListener('click', function () {
   formFieldTextInputJob.value = profileStatus.textContent
   openPopup(popupEditProfile)
 });
+
 closeEditProfileBtn.addEventListener('click', function () {
   closePopup(popupEditProfile)
 });
@@ -137,7 +134,7 @@ addBox.addEventListener('click', function () {
   openPopup(popupAddCard)
   titleAddInput.value = ""
   linkAddInput.value = ""
-  popupAddCard.querySelector('.form__save-button').classList.add(validationConfig.inactiveButtonClass)
+  validationAdd.makeInactive()
 });
 
 formFieldAdd.addEventListener('submit', formAddCardSubmitHandler);
@@ -145,3 +142,9 @@ addCloseButton.addEventListener('click', function () {
   closePopup(popupAddCard) 
 
 });
+
+const validationEdit = new FormValidator(validationConfig, formFieldEdit)
+validationEdit.enableValidation()
+
+const validationAdd = new FormValidator(validationConfig, formFieldAdd)
+validationAdd.enableValidation()
