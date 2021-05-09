@@ -59,16 +59,16 @@ const validationConfig = {
 function handleESC(evt) {
     if (evt.key == "Escape") {
 
-      popupName = document.querySelector('.popup_opened')
-      closePopup(popupName)
+      // popupName = document.querySelector('.popup_opened')
+      closePopup(document.querySelector('.popup_opened'))
     }
 } 
 
 function checkPopup (e){
   
     if (e.target.className.indexOf('popup ') !== -1) {
-      popupName = document.querySelector('.popup_opened')
-      closePopup(popupName)
+      // popupName = 
+      closePopup(document.querySelector('.popup_opened'))
     }
 }
 
