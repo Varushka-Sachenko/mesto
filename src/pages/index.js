@@ -1,12 +1,20 @@
-import Card from './Card.js'
-import {initialCards} from './initialCards.js'
-import {FormValidator} from './FormValidator.js'
-import Popup from './Popup.js'
-import PopupWithForm from './PopupWithForm.js'
-import PopupWithImage from './PopupWithImage.js'
-import Section from './Section.js'
-import userInfo from './UserInfo.js'
+import Card from '../components/Card.js'
+import {initialCards} from '../components/initialCards.js'
+import {FormValidator} from '../components/FormValidator.js'
+import Popup from '../components/Popup.js'
+import PopupWithForm from '../components/PopupWithForm.js'
+import PopupWithImage from '../components/PopupWithImage.js'
+import Section from '../components/Section.js'
+import userInfo from '../components/UserInfo.js'
 
+import './index.css';
+import Avatar from '../images/Avatar.svg';
+
+
+const whoIsTheGoat = [
+  // меняем исходные пути на переменные
+  { name: 'Avatar', image: Avatar },
+]; 
 
 const popupEditProfile = new Popup('.popup_field_edit');
 
