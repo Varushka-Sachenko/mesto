@@ -1,26 +1,22 @@
 import Card from './Card.js'
 import {initialCards} from './initialCards.js'
 import {FormValidator} from './FormValidator.js'
+import Popup from './Popup.js'
+import PopupWithForm from './PopupWithForm.js'
+import PopupWithImage from './PopupWithImage.js'
+import Section from './Section.js'
+import userInfo from './UserInfo.js'
 
-const popupEditProfile = document.querySelector('.popup_field_edit');
 
-const formFieldEdit = document.querySelector('.form_field_edit');
-const formFieldTextInputName = formFieldEdit.querySelector('.form__field-text_input_name')
-const formFieldTextInputJob = formFieldEdit.querySelector('.form__field-text_input_job')
+const popupEditProfile = new Popup('.popup_field_edit');
 
-const popupAddCard = document.querySelector('.popup_field_add');
+const formFieldEdit = new PopupWithForm('.popup_field_edit', formEditProfileSubmitHandler);
+const formFieldTextInputName = document.querySelector('.form__field-text_input_name')
+const formFieldTextInputJob = document.querySelector('.form__field-text_input_job')
 
-const formFieldAdd = document.querySelector('.form_field_add');
+const popupAddCard = new Popup('.popup_field_add');
 
-const titleAddInput = popupAddCard.querySelector('.form__field-text_input_title')
-const linkAddInput = popupAddCard.querySelector('.form__field-text_input_link')
-
-// Выберите элементы, куда должны быть вставлены значения полей
-const profileName = document.querySelector('.profile__name');
-const profileStatus = document.querySelector('.profile__status');
-
-const closeEditProfileBtn = popupEditProfile.querySelector('.popup__close-button');
-const addCloseButton = popupAddCard.querySelector('.popup__close-button');
+const formFieldAdd = new PopupWithForm('.popup_field_add', formAddCardSubmitHandler);
 
 const editBox = document.querySelector('.profile__edit-button-box');
 
@@ -31,13 +27,17 @@ const page = document.querySelector('.page');
 
 const elementTemplateContent = document.getElementById('elemTemp').content
 
-const popupImage = document.querySelector('.image-popup')
+const popupImage = new PopupWithImage('.image-popup')
 
-const popupImageCloseButton = popupImage.querySelector('.popup__close-button')
+const profileName = document.querySelector('.profile__name')
+const profileStatus = document.querySelector('.profile__status')
+//const popupImageCloseButton = popupImage.querySelector('.popup__close-button')
 
-const titlePopupImage = popupImage.querySelector('.image-popup__title')
+//const titlePopupImage = popupImage.querySelector('.image-popup__title')
 
-
+const profileInfo = new userInfo({
+  nameSelector:'.profile__name', 
+  infoSelector:'.profile__status'})
 
 //Добавление начальных карточек
 initialCards.forEach( function (item, i, arr) {
@@ -55,96 +55,72 @@ const validationConfig = {
     errorClass: 'form__input-error_active'
 } 
 
+popupImage.setEventListeners ()
+popupEditProfile.setEventListeners ()
+popupAddCard.setEventListeners()
+
+formFieldEdit.setEventListeners()
+formFieldAdd.setEventListeners()
 
 
-
-function handleESC(evt) {
-    if (evt.key === "Escape") {
-
-      // popupName = document.querySelector('.popup_opened')
-      closePopup(document.querySelector('.popup_opened'))
-    }
-} 
-
-function checkPopup (e){
-  
-    if (e.target.className.indexOf('popup ') !== -1) {
-      // popupName = 
-      closePopup(document.querySelector('.popup_opened'))
-    }
+function cardImageClick (link, title){
+  popupImage.open(link, title)
 }
+
 
 //Редактировать профиль
-function formEditProfileSubmitHandler(evt) {
-  evt.preventDefault();
-  profileName.textContent = formFieldTextInputName.value;
-  profileStatus.textContent = formFieldTextInputJob.value;
-  closePopup(popupEditProfile)
+function formEditProfileSubmitHandler(data) {
+  profileInfo.setUserInfo(data)
+  popupEditProfile.close()
 }
 
-popupImageCloseButton.addEventListener('click', function () {
-  closePopup(popupImage)
-})
+// popupImageCloseButton.addEventListener('click', function () {
+//   closePopup(popupImage)
+// })
 
 //Открыть добавление
 
 function createCard(title, src) {
-	const card = new Card({ title, src }, '.template', openPopup)
+	const card = new Card({ title, src }, '.template', cardImageClick)
 	const cardElement= card.generateCard()
 	return cardElement
 }
 
 //Добавить карточку
-function formAddCardSubmitHandler(evt) {
-  evt.preventDefault();
-  // const elementTemplateClone = createCard(titleAddInput.value, linkAddInput.value)
-  elements.prepend(createCard(titleAddInput.value, linkAddInput.value))
-  closePopup(popupAddCard)
-}
-
-function openPopup(popupName) {
-  popupName.classList.add('popup_opened');
-  popupName.addEventListener('click',  checkPopup);
-  document.addEventListener('keydown',  handleESC); 
-  
-}
-
-
-function closePopup(popupName) {
-  popupName.classList.remove('popup_opened');
-  popupName.removeEventListener('click',  checkPopup);
-  document.removeEventListener('keydown',  handleESC); 
+function formAddCardSubmitHandler(data) {
+  //console.log(data)
+  elements.prepend(createCard(data.title, data.link))
+  formFieldAdd.close()
 }
 
 
 
-formFieldEdit.addEventListener('submit', formEditProfileSubmitHandler);
+
+//formFieldEdit.addEventListener('submit', formEditProfileSubmitHandler);
+
 editBox.addEventListener('click', function () {
 
-  formFieldTextInputName.value = profileName.textContent
-  formFieldTextInputJob.value = profileStatus.textContent
-  openPopup(popupEditProfile)
+  formFieldTextInputName.value = profileInfo.getUserInfo().name
+  formFieldTextInputJob.value = profileInfo.getUserInfo().info
+  popupEditProfile.open()
+  
 });
 
-closeEditProfileBtn.addEventListener('click', function () {
-  closePopup(popupEditProfile)
-});
 
 addBox.addEventListener('click', function () {
-  openPopup(popupAddCard)
-  titleAddInput.value = ""
-  linkAddInput.value = ""
+  popupAddCard.open()
+  // titleAddInput.value = ""
+  // linkAddInput.value = ""
   validationAdd.makeInactive()
 });
 
-formFieldAdd.addEventListener('submit', formAddCardSubmitHandler);
-addCloseButton.addEventListener('click', function () { 
-  closePopup(popupAddCard) 
+//formFieldAdd.addEventListener('submit', formAddCardSubmitHandler);
 
-});
+const editForm = document.querySelector('.form_field_edit')
+const addForm = document.querySelector('.form_field_add')
 
-const validationEdit = new FormValidator(validationConfig, formFieldEdit)
+const validationEdit = new FormValidator(validationConfig, editForm)
 validationEdit.enableValidation()
 
-const validationAdd = new FormValidator(validationConfig, formFieldAdd)
+const validationAdd = new FormValidator(validationConfig, addForm)
 validationAdd.enableValidation()

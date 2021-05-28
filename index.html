@@ -43,11 +43,11 @@
                     <button class="popup__close-button" type="button"></button>
                     <form class="form form_field_edit" name="test" method="post">
                         <h2 class="form__text">Редактировать профиль</h2>
-                        <input class="form__field-text form__field-text_input_name" placeholder="Имя" type="text"
+                        <input name="name" class="form__field-text form__field-text_input_name" placeholder="Имя" type="text"
                             size="40" id="username" required minlength="2" maxlength="40">
                         <span id="username-error" class="username-error form__input-error"></span>
 
-                        <input class="form__field-text form__field-text_input_job" placeholder="Вид деятельности"
+                        <input name="info" class="form__field-text form__field-text_input_job" placeholder="Вид деятельности"
                             type="text" size="40" id="status" required minlength="2" maxlength="200">
                         <span id="status-error" class="status-error form__input-error"></span>
                         <button type="submit" class="form__save-button">Сохранить</button>
@@ -60,10 +60,10 @@
                     <button class="popup__close-button" type="button"></button>
                     <form class="form form_field_add" name="test" method="post">
                         <h2 class="form__text">Новое место</h2>
-                        <input class="form__field-text form__field-text_input_title" placeholder="Название" type="text"
+                        <input name="title" class="form__field-text form__field-text_input_title" placeholder="Название" type="text"
                             size="40" id="nameplace" value="" required minlength="2" maxlength="30">
                         <span id="nameplace-error" class="nameplace-error form__input-error"></span>
-                        <input class="form__field-text form__field-text_input_link" placeholder="Ссылка на картинку"
+                        <input name="link" class="form__field-text form__field-text_input_link" placeholder="Ссылка на картинку"
                             type="URL" size="40" id="linkplace" value="" required>
                         <span id="linkplace-error" class="linkplace-error form__input-error"></span>
                         <button type="submit" class="form__save-button">Сохранить</button>

@@ -30,6 +30,7 @@ class Card {
 	}
 
 	_openImage(){
+		
 		const popupImage = document.querySelector('.image-popup')
 		const imagePopupImage = popupImage.querySelector('.image-popup__image')
 		const titlePopupImage = popupImage.querySelector('.image-popup__title')
@@ -37,10 +38,12 @@ class Card {
 		imagePopupImage.alt = "Изображение " + this._title;
 
 		titlePopupImage.textContent = this._title
-		this.openPopup(popupImage)
+		//console.log(this.openPopup)
+		this.openPopup(this._link, this._title)
 	}
 
 	_setEventListeners() {
+		
 		this._deleteButton = this._element.querySelector('.element__delete-button')
 		this._deleteButton.addEventListener('click', (evt) => {
 			this._deleteCard(evt)
@@ -52,7 +55,9 @@ class Card {
 		});
 		
 		this._element.querySelector('.element__image').addEventListener('click', () => {
+			
 			this._openImage()
+			
 		});
 	  }
 	//здесь будут другие методы
