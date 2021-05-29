@@ -39,9 +39,9 @@ export class FormValidator {
         this._buttonElement.classList.add(this._inactiveButtonClass);
     }
 
-    _toggleButtonState(inputList, buttonElement) {
+    _toggleButtonState() {
         // Если есть хотя бы один невалидный инпут
-        if (this._hasInvalidInput(inputList)) {
+        if (this._hasInvalidInput(this._inputList)) {
             // сделай кнопку неактивной
             this.makeInactive()
             this._buttonElement.disabled = true
@@ -52,8 +52,8 @@ export class FormValidator {
         }
     };
 
-    _hasInvalidInput(inputList) {
-        return inputList.some((inputElement) => {
+    _hasInvalidInput() {
+        return this._inputList.some((inputElement) => {
             // console.log(inputElement, !inputElement.validity.valid)
 
             return !inputElement.validity.valid;
@@ -61,17 +61,17 @@ export class FormValidator {
     }
 
 
-    _setEventListeners(formElement) {
+    _setEventListeners() {
 
         // чтобы проверить состояние кнопки в самом начале
 
-        this._toggleButtonState(this._inputList, this._buttonElement);
+        this._toggleButtonState();
 
         this._inputList.forEach((inputElement) => {
 
             inputElement.addEventListener('input', () => {
 
-                this._toggleButtonState(this._inputList, this._buttonElement);
+                this._toggleButtonState();
                 this._checkInputValidity(this._formElement, inputElement);
                 // чтобы проверять его при изменении любого из полей
 

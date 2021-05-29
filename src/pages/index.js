@@ -16,13 +16,13 @@ const whoIsTheGoat = [
   { name: 'Avatar', image: Avatar },
 ]; 
 
-const popupEditProfile = new Popup('.popup_field_edit');
+//const formFieldEdit = new Popup('.popup_field_edit');
 
 const formFieldEdit = new PopupWithForm('.popup_field_edit', formEditProfileSubmitHandler);
 const formFieldTextInputName = document.querySelector('.form__field-text_input_name')
 const formFieldTextInputJob = document.querySelector('.form__field-text_input_job')
 
-const popupAddCard = new Popup('.popup_field_add');
+//const formFieldAdd = new Popup('.popup_field_add');
 
 const formFieldAdd = new PopupWithForm('.popup_field_add', formAddCardSubmitHandler);
 
@@ -45,14 +45,20 @@ const profileStatus = document.querySelector('.profile__status')
 
 const profileInfo = new userInfo({
   nameSelector:'.profile__name', 
-  infoSelector:'.profile__status'})
+  infoSelector:'.profile__status'
+})
+
+const additionCards = new Section({
+  items:initialCards, 
+  renderer: createCard,}, '.elements')
+additionCards.drawAllCards()
 
 //Добавление начальных карточек
-initialCards.forEach( function (item, i, arr) {
-//console.log(initialCards[i].name)
-  elements.prepend(createCard(initialCards[i].name, initialCards[i].link))
+// initialCards.forEach( function (item, i, arr) {
+// //console.log(initialCards[i].name)
+//   elements.prepend(createCard(initialCards[i].name, initialCards[i].link))
   
-})
+// })
 
 const validationConfig = {
     formSelector: '.form',
@@ -64,8 +70,8 @@ const validationConfig = {
 } 
 
 popupImage.setEventListeners ()
-popupEditProfile.setEventListeners ()
-popupAddCard.setEventListeners()
+//formFieldEdit.setEventListeners ()
+//formFieldAdd.setEventListeners()
 
 formFieldEdit.setEventListeners()
 formFieldAdd.setEventListeners()
@@ -79,7 +85,7 @@ function cardImageClick (link, title){
 //Редактировать профиль
 function formEditProfileSubmitHandler(data) {
   profileInfo.setUserInfo(data)
-  popupEditProfile.close()
+  formFieldEdit.close()
 }
 
 // popupImageCloseButton.addEventListener('click', function () {
@@ -97,7 +103,8 @@ function createCard(title, src) {
 //Добавить карточку
 function formAddCardSubmitHandler(data) {
   //console.log(data)
-  elements.prepend(createCard(data.title, data.link))
+  additionCards.addItem(createCard(data.title, data.link))
+  
   formFieldAdd.close()
 }
 
@@ -110,13 +117,13 @@ editBox.addEventListener('click', function () {
 
   formFieldTextInputName.value = profileInfo.getUserInfo().name
   formFieldTextInputJob.value = profileInfo.getUserInfo().info
-  popupEditProfile.open()
+  formFieldEdit.open()
   
 });
 
 
 addBox.addEventListener('click', function () {
-  popupAddCard.open()
+  formFieldAdd.open()
   // titleAddInput.value = ""
   // linkAddInput.value = ""
   validationAdd.makeInactive()
