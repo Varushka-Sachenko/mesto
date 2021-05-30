@@ -7,31 +7,31 @@ export class FormValidator {
         this._inputErrorClass = classes.inputErrorClass
         this._errorClass = classes.errorClass
         this._inactiveButtonClass = classes.inactiveButtonClass
-
+        this._setEventListeners = this._setEventListeners.bind(this)
     }
 
 
 
-    _showInputError(formElement, inputElement, errorMessage) {
-        const errorElement = formElement.querySelector(`.${inputElement.id}-error`); // span
+    _showInputError(inputElement, errorMessage) {
+        const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`); // span
         inputElement.classList.add(this._inputErrorClass);
         errorElement.textContent = errorMessage;
         errorElement.classList.add(this._errorClass);
     };
 
-    _hideInputError(formElement, inputElement) {
-        const errorElement = formElement.querySelector(`.${inputElement.id}-error`);// span
+    _hideInputError(inputElement) {
+        const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);// span
 
         inputElement.classList.remove(this._inputErrorClass);
         errorElement.classList.remove(this._errorClass);
         errorElement.textContent = '';
     };
 
-    _checkInputValidity(formElement, inputElement) {
+    _checkInputValidity(inputElement) {
         if (!inputElement.validity.valid) {
-            this._showInputError(formElement, inputElement, inputElement.validationMessage);
+            this._showInputError(inputElement, inputElement.validationMessage);
         } else {
-            this._hideInputError(formElement, inputElement);
+            this._hideInputError(inputElement);
         }
     };
 
@@ -72,7 +72,7 @@ export class FormValidator {
             inputElement.addEventListener('input', () => {
 
                 this._toggleButtonState();
-                this._checkInputValidity(this._formElement, inputElement);
+                this._checkInputValidity(inputElement);
                 // чтобы проверять его при изменении любого из полей
 
             });

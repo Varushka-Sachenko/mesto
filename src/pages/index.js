@@ -10,25 +10,19 @@ import userInfo from '../components/UserInfo.js'
 import './index.css';
 import Avatar from '../images/Avatar.svg';
 
-
-const whoIsTheGoat = [
-  // меняем исходные пути на переменные
-  { name: 'Avatar', image: Avatar },
-]; 
-
 //const formFieldEdit = new Popup('.popup_field_edit');
 
-const formFieldEdit = new PopupWithForm('.popup_field_edit', formEditProfileSubmitHandler);
+const formFieldEdit = new PopupWithForm('.popup_field_edit', editProfileSubmitHandler);
 const formFieldTextInputName = document.querySelector('.form__field-text_input_name')
 const formFieldTextInputJob = document.querySelector('.form__field-text_input_job')
 
 //const formFieldAdd = new Popup('.popup_field_add');
 
-const formFieldAdd = new PopupWithForm('.popup_field_add', formAddCardSubmitHandler);
+const formFieldAdd = new PopupWithForm('.popup_field_add', addCardSubmitHandler);
 
-const editBox = document.querySelector('.profile__edit-button-box');
+const buttonOpenPopupEditProfile = document.querySelector('.profile__edit-button-box');
 
-const addBox = document.querySelector('.profile__add-button-box');
+const buttonOpenPopupAddCard = document.querySelector('.profile__add-button-box');
 
 const elements = document.querySelector('.elements');
 const page = document.querySelector('.page');
@@ -43,6 +37,8 @@ const profileStatus = document.querySelector('.profile__status')
 
 //const titlePopupImage = popupImage.querySelector('.image-popup__title')
 
+
+
 const profileInfo = new userInfo({
   nameSelector:'.profile__name', 
   infoSelector:'.profile__status'
@@ -53,13 +49,6 @@ const additionCards = new Section({
   renderer: createCard,}, '.elements')
 additionCards.drawAllCards()
 
-//Добавление начальных карточек
-// initialCards.forEach( function (item, i, arr) {
-// //console.log(initialCards[i].name)
-//   elements.prepend(createCard(initialCards[i].name, initialCards[i].link))
-  
-// })
-
 const validationConfig = {
     formSelector: '.form',
     inputSelector: '.form__field-text',
@@ -69,51 +58,54 @@ const validationConfig = {
     errorClass: 'form__input-error_active'
 } 
 
-popupImage.setEventListeners ()
-//formFieldEdit.setEventListeners ()
-//formFieldAdd.setEventListeners()
+const formEditProfile = document.querySelector('.form_field_edit')
+const formAddCard = document.querySelector('.form_field_add')
 
-formFieldEdit.setEventListeners()
-formFieldAdd.setEventListeners()
+const validationEdit = new FormValidator(validationConfig, formEditProfile)
 
 
-function cardImageClick (link, title){
+const validationAdd = new FormValidator(validationConfig, formAddCard)
+
+
+
+function clickCardImage (link, title){
   popupImage.open(link, title)
 }
 
 
 //Редактировать профиль
-function formEditProfileSubmitHandler(data) {
+function editProfileSubmitHandler(data) {
   profileInfo.setUserInfo(data)
   formFieldEdit.close()
 }
 
-// popupImageCloseButton.addEventListener('click', function () {
-//   closePopup(popupImage)
-// })
 
 //Открыть добавление
 
 function createCard(title, src) {
-	const card = new Card({ title, src }, '.template', cardImageClick)
+	const card = new Card({ title, src }, '.template', clickCardImage)
 	const cardElement= card.generateCard()
 	return cardElement
 }
 
 //Добавить карточку
-function formAddCardSubmitHandler(data) {
+function addCardSubmitHandler(data) {
   //console.log(data)
   additionCards.addItem(createCard(data.title, data.link))
   
   formFieldAdd.close()
 }
 
+popupImage.setEventListeners ()
 
 
+formFieldEdit.setEventListeners()
+formFieldAdd.setEventListeners()
 
-//formFieldEdit.addEventListener('submit', formEditProfileSubmitHandler);
 
-editBox.addEventListener('click', function () {
+//formFieldEdit.addEventListener('submit', editProfileSubmitHandler);
+
+buttonOpenPopupEditProfile.addEventListener('click', function () {
 
   formFieldTextInputName.value = profileInfo.getUserInfo().name
   formFieldTextInputJob.value = profileInfo.getUserInfo().info
@@ -122,20 +114,15 @@ editBox.addEventListener('click', function () {
 });
 
 
-addBox.addEventListener('click', function () {
+buttonOpenPopupAddCard.addEventListener('click', function () {
   formFieldAdd.open()
   // titleAddInput.value = ""
   // linkAddInput.value = ""
   validationAdd.makeInactive()
 });
 
-//formFieldAdd.addEventListener('submit', formAddCardSubmitHandler);
+//formFieldAdd.addEventListener('submit', addCardSubmitHandler);
 
-const editForm = document.querySelector('.form_field_edit')
-const addForm = document.querySelector('.form_field_add')
 
-const validationEdit = new FormValidator(validationConfig, editForm)
-validationEdit.enableValidation()
-
-const validationAdd = new FormValidator(validationConfig, addForm)
 validationAdd.enableValidation()
+validationEdit.enableValidation()

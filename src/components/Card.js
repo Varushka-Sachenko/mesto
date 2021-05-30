@@ -26,7 +26,8 @@ class Card {
 
 	_deleteCard(evt){
 		const card = evt.target.closest('.element');
-     	card.remove();
+		this._element.remove();
+		this._element = null;
 	}
 
 	_openImage(){
