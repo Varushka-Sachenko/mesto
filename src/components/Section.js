@@ -6,8 +6,8 @@ export default class Section{
         this.addItem = this.addItem.bind(this)
     }
 
-    drawAllCards(){
-        this._items.forEach(item => this.addItem(this._renderer(item)))
+    drawAllCards(items){
+        items.forEach(item => this.addItem(this._renderer(item)))
     }
 
     addItem(element){

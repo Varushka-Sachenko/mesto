@@ -1,5 +1,5 @@
 export default class UserInfo {
-    constructor ({nameSelector, infoSelector, avatarLink}){
+    constructor (nameSelector, infoSelector, avatarLink){
         this._nameSelector = nameSelector
         this._infoSelector = infoSelector
         this._avatarLink = avatarLink
@@ -9,7 +9,7 @@ export default class UserInfo {
         //console.log(this._nameSelector)
         const userName = document.querySelector(this._nameSelector).textContent
         const userInfo = document.querySelector(this._infoSelector).textContent
-        const avatar = document.querySelector('profile__avatar')
+        const avatar = document.querySelector('.profile__avatar')
         
         const userData = {
             name: userName,
@@ -19,10 +19,10 @@ export default class UserInfo {
         return (userData)
     }
 
-    // setNewAvatar(link){
-    //     const avatar = document.querySelector('profile__avatar')
-    //     avatar.src = links
-    // }
+    setNewAvatar(link){
+        const avatar = document.querySelector('.profile__avatar')
+        avatar.src = link
+    }
 
     setUserInfo (userData){
         //console.log(document.querySelector('.profile__name'))

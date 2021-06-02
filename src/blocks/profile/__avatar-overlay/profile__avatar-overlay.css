@@ -7,6 +7,7 @@
     background-color: rgba(0, 0, 0, 0.8);
     background-size: 26px;
     visibility: hidden;
+    background-repeat: no-repeat;
 }
 
 .profile__avatar-overlay:hover{

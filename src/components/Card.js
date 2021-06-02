@@ -1,8 +1,9 @@
 import PopupDeleteCard from './PopupDeleteCard.js'
 import Api from './Api.js'
 class Card {  
-	constructor(data, cardSelector, openPopup, deleteCard, classApi) { 
-	    this._title = data.name;    
+	constructor(data, cardSelector, openPopup, deleteCard, classApi, likeCard) { 
+	    this._title = data.name; 
+		this._likeCard = likeCard   
 	    this._link = data.link;    
 		this._cardId = data._id
 		this._owner = data.owner._id
@@ -22,13 +23,13 @@ class Card {
 		
 		this._setEventListeners();
 		const cardImage = this._element.querySelector('.element__image');
-		const counter = this._element.querySelector('.element__like-count');
+		this._counter = this._element.querySelector('.element__like-count');
 		cardImage.src = this._link;
 		cardImage.alt = "Изображение " + this._title;
-		counter.textContent = this._cardLikes.length
+		this._counter.textContent = this._cardLikes.length
 		this._element.querySelector('.element__title').textContent = this._title;
 
-		if (this._cardLikes.includes(this._owner)){
+		if (this._cardLikes.some(item => item._id === this._owner)){
 			this._likeButton.classList.add('element__like-button_active');
 				
 		}
@@ -47,22 +48,11 @@ class Card {
 		return this._element
 	}
 
-	_likeCard (){
-		if (this._cardLikes.includes(this._owner)){
-			this._likeButton.classList.remove('element__like-button_active');
-			this._classApi.unlikeCard(this._cardId)
-			
-		} else {
-			this._classApi.likeCard(this._cardId)
-			this._likeButton.classList.add('element__like-button_active');
-		}
+	// _likeCard (){
 		
-	}
+		
+	// }
 
-	_deleteCard(cardId){
-		
-		this._classApi.deleteCard(cardId)
-	}
 
 	_openImage(){
 		
@@ -82,11 +72,9 @@ class Card {
 		
 		
 		this._deleteButton.addEventListener('click', (evt) => {
-			const popupDeleteCard = new PopupDeleteCard('.popup_delete-card', this._deleteCard, this._cardId);
-			popupDeleteCard.open()
-			popupDeleteCard.setEventListeners()
+			const card = evt.target.closest('.element')
+			this._deleteCard(this._cardId, card)
 
-			
 		});
   
 		
