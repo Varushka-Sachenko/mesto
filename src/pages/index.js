@@ -39,7 +39,7 @@ const page = document.querySelector('.page');
 
 const elementTemplateContent = document.getElementById('elemTemp').content
 
-const popupImage = new PopupWithImage('.image-popup')
+
 
 const profileName = document.querySelector('.profile__name')
 const profileStatus = document.querySelector('.profile__status')
@@ -48,7 +48,7 @@ const profileStatus = document.querySelector('.profile__status')
 //const titlePopupImage = popupImage.querySelector('.image-popup__title')
 
 
-const profileInfo = new userInfo('.profile__name', '.profile__status',profileAvatar.src)
+const profileInfo = new userInfo('.profile__name', '.profile__status', '.profile__avatar')
 
 
 const classApi = new Api ({
@@ -60,30 +60,6 @@ const classApi = new Api ({
 const additionCards = new Section({ 
   renderer: createCard,}, '.elements')
 
-classApi.getInitialCards()
-  .then((result) => {
-    additionCards.drawAllCards(result)
-    //console.log(cards)
-    // обрабатываем результат
-  })
-  .catch((err) => {
-    console.log(err); // выведем ошибку в консоль
-});
-//console.log(cards)
-changeUserInfo()
-function changeUserInfo(){
-  classApi.loadUserInfo()
-.then((result) => {
-  
-  profileName.textContent = result.name
-  profileStatus.textContent = result.about
-  profileAvatar.src = result.avatar
-})
-.catch((err) => {
-  console.log(err); // выведем ошибку в консоль
-});
-
-}
 
 
 const validationConfig = {
@@ -104,93 +80,110 @@ const validationEdit = new FormValidator(validationConfig, formEditProfile)
 const validationAdd = new FormValidator(validationConfig, formAddCard)
 const validationDelete = new FormValidator(validationConfig, formDeleteCard)
 
+
+// index.js
+let userId;
+//let userData
+
+Promise.all([classApi.loadUserInfo(), classApi.getInitialCards()])
+  .then(([userData, cards]) => {
+    // console.log([userData, cards])
+    userId = userData._id;
+    additionCards.drawAllCards(cards);
+    profileInfo.setUserInfo(userData);
+    profileInfo.setNewAvatar(userData.avatar);
+  })
+  .catch((err) => {
+    console.log(err); // выведем ошибку в консоль
+  });
+
 function clickCardImage (link, title){
   popupImage.open(link, title)
 }
 
+function openImagePopup (link, title){
+  const popupImage = new PopupWithImage('.image-popup')
+  popupImage.open(link, title)
+  popupImage.setEventListeners()
+
+}
 
 //Редактировать профиль
 function editProfileSubmitHandler(data) {
   classApi.editProfileINfo(data)
-  changeUserInfo()
-  profileInfo.setUserInfo(data)
-  formFieldEdit.close()
+  .then((result) => {
+    profileInfo.setUserInfo(result);
+    formFieldEdit.close();
+  })
+  .catch((err) => {
+    console.log(err); // выведем ошибку в консоль
+  });
+  
 }
 
 function addNewAvatar (data) {
   classApi.changeAvatar(data.avatar)
-  profileInfo.setNewAvatar(data.avatar)
-  popupEditAvatar.close()
+  .then((result) => {
+    // console.log(result)
+    profileInfo.setNewAvatar(result.avatar);
+    popupEditAvatar.close();
+  })
+  .catch((err) => {
+    console.log(err); // выведем ошибку в консоль
+  });
+  
 }
 
 //Открыть добавление
 
 
 function deleteThisCard (cardId, card){
-  const popupDeleteCard = new PopupDeleteCard('.popup_delete-card', classApi.deleteCard, cardId, 'https://mesto.nomoreparties.co/v1/cohort-24/cards', 'a94d4dc8-3936-43d8-a3b5-2773303eb737', card);
+  const popupDeleteCard = new PopupDeleteCard('.popup_delete-card', classApi.deleteCard, cardId, card);
   popupDeleteCard.open()
   popupDeleteCard.setEventListeners()
   // classApi.deleteCard(cardId)
 }
-function likeThisCard (cardId){
+
+function likeThisCard (card) {
   
-		if (this._cardLikes.some(item => item._id === this._owner)){
-			this._likeButton.classList.remove('element__like-button_active');
-			classApi.unlikeCard(this._cardId)
-      .then((result) => {
-        //console.log(result)
-        this._counter.textContent = result.likes.length
-      })
+  if(card.isLiked()) {
+    console.log('unlike')
+    classApi.unlikeCard(this.getCardId())
+      .then(data => card.setLikesInfo(data))
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
       });
-      
-			//this._counter.textContent = this._cardLikes.length - 1
-			
-		} else {
-			classApi.likeCard(this._cardId)
-      .then((result) => {
-        this._counter.textContent = result.likes.length
-      })
+  } else {
+    console.log('like')
+    classApi.likeCard(this.getCardId())
+      .then(data => card.setLikesInfo(data))
       .catch((err) => {
-        console.log(err); // выведем ошибку в консоль
+      console.log(err); // выведем ошибку в консоль
       });
-			this._likeButton.classList.add('element__like-button_active');
-		}
-    //console.log(this._cardLikes)
+  }
 }
 
+
 function createCard(data) {
-	const card = new Card(data, '.template', clickCardImage, deleteThisCard, classApi, likeThisCard)
+	const card = new Card(data, '.template', clickCardImage, deleteThisCard, userId, likeThisCard, openImagePopup)
 	const cardElement= card.generateCard()
 	return cardElement
 }
 
 //Добавить карточку
 function addCardSubmitHandler(data) {
-  const owner = classApi.addNewCard(data)
-  classApi.getInitialCards()
-  .then((result) => {
-    for (let i=0; i<result.length; ++i){
-      
-      if(result[i].owner._id === owner._id){
-        additionCards.addItem(createCard(result[i]))
-        break
-      }
-      
-    }
-    
-    //console.log(cards)
-    // обрабатываем результат
-  })
-  .catch((err) => {
-    console.log(err); // выведем ошибку в консоль
-});
-  
-  formFieldAdd.close()
-}
+  classApi.addNewCard(data)
+    .then((result) => {
+      const newCard = createCard(result);
+      additionCards.addItem(newCard);
+      formFieldAdd.close();
+    })
+    .catch((err) => {
+      console.log(err); // выведем ошибку в консоль
+    });
+} 
 
-popupImage.setEventListeners ()
+
 popupEditAvatar.setEventListeners()
 
 formFieldEdit.setEventListeners()

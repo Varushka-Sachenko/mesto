@@ -6,6 +6,19 @@ export default class Api {
       this.adress = adress
       this._token = token
   }
+  _checkResult(res){
+    if (res.ok) {
+      // const k = res.json()
+      // console.log(k)
+      return res
+    }
+    // если ошибка, отклоняем промис
+    return Promise.reject(`Ошибка: ${res.status}`);
+  }
+
+  _changeToJson(res){
+    return res.json()
+  }
 
   getInitialCards() {
       return fetch(this.adress, {
@@ -14,38 +27,36 @@ export default class Api {
         }
       })
         .then(res => {
-          if (res.ok) {
-            return res.json();
-          }
-    
-          // если ошибка, отклоняем промис
-          return Promise.reject(`Ошибка: ${res.status}`);
-        });
+          return this._checkResult(res)
+        })
+        .then(res =>{
+          return this._changeToJson(res)
+        })
+        
   }
 
   loadUserInfo(){
-      return fetch('https://nomoreparties.co/v1/cohort-24/users/me', {
-          headers: {
-          authorization: this._token
-        }
-      }) 
-      .then(res => {
-          if (res.ok) {
-            return res.json();
-        }
-  
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .then(res =>{
-        this._owner = res
-        return res
-      });
+    return fetch('https://nomoreparties.co/v1/cohort-24/users/me', {
+        headers: {
+        authorization: this._token
+      }
+    }) 
+    .then(res => {
+      return this._checkResult(res)
+      // console.log(res)
+    })
+    .then(res =>{
+      return this._changeToJson(res)
+    })
+    // .then(res =>{
+    //   this._changeToJson(res)
+    // })
+      
   }
 
   editProfileINfo(data){
       //console.log(data)
-      fetch('https://mesto.nomoreparties.co/v1/cohort-24/users/me', {
+      return fetch('https://mesto.nomoreparties.co/v1/cohort-24/users/me', {
       method: 'PATCH',
       headers: {
           authorization: this._token,
@@ -55,11 +66,17 @@ export default class Api {
           name: data.name,
           about: data.info,
       })
-  })
+      })
+      .then(res => {
+        return this._checkResult(res)
+      })
+      .then(res =>{
+        return this._changeToJson(res)
+      })
   }
 
   addNewCard(data){
-      fetch('https://mesto.nomoreparties.co/v1/cohort-24/cards', {
+      return fetch('https://mesto.nomoreparties.co/v1/cohort-24/cards', {
       method: 'POST',
       headers: {
           authorization: this._token,
@@ -70,21 +87,31 @@ export default class Api {
           link: data.link,
       })
       })
-      const owner = this._owner
-      //console.log(owner)
-      return owner
+      .then(res => {
+        return this._checkResult(res)
+      })
+      .then(res =>{
+        return this._changeToJson(res)
+      })
+      
   }
 
-
-  deleteCard(cardId, card){
-      fetch(`https://mesto.nomoreparties.co/v1/cohort-24/cards/${cardId}`, {
+  deleteCard(cardId){
+     return fetch(`https://mesto.nomoreparties.co/v1/cohort-24/cards/${cardId}`, {
       method: 'DELETE',
       headers: {
           authorization: this._token,
           'Content-Type': 'application/json'
       },
     })
-    card.remove()
+    // .then(res => {
+    //   console.log(res)
+    //   return this._checkResult(res)
+    // })
+    // .then(res =>{
+    //   return this._changeToJson(res)
+    // })
+    // card.remove()
   }
 
 
@@ -97,13 +124,11 @@ export default class Api {
     },
     })
     .then(res => {
-      if (res.ok) {
-        return res.json();
-    }
-
-    // если ошибка, отклоняем промис
-    return Promise.reject(`Ошибка: ${res.status}`);
-  })
+      return this._checkResult(res)
+    })
+    .then(res =>{
+      return this._changeToJson(res)
+    })
   }
 
   unlikeCard(cardId){
@@ -114,18 +139,16 @@ export default class Api {
         'Content-Type': 'application/json'
     },})
     .then(res => {
-      if (res.ok) {
-        return res.json();
-    }
-
-    // если ошибка, отклоняем промис
-    return Promise.reject(`Ошибка: ${res.status}`);
-  })
+     return this._checkResult(res)
+    })
+    .then(res =>{
+      return this._changeToJson(res)
+    })
 
   }    
 
   changeAvatar(link){
-    fetch(`https://mesto.nomoreparties.co/v1/cohort-24/users/me/${link}`, {
+    return fetch(`https://mesto.nomoreparties.co/v1/cohort-24/users/me/avatar`, {
     method: 'PATCH',
     headers: {
         authorization: this._token,
@@ -133,7 +156,15 @@ export default class Api {
     },
     body: JSON.stringify({
       avatar: link,
-  })})
+    })
+    })
+    .then(res => {
+      // console.log(res)
+      return this._checkResult(res)
+    })
+    .then(res =>{
+      return this._changeToJson(res)
+    })
 
   }
 }
