@@ -48,9 +48,7 @@ export default class Api {
     .then(res =>{
       return this._changeToJson(res)
     })
-    // .then(res =>{
-    //   this._changeToJson(res)
-    // })
+    
       
   }
 
@@ -100,18 +98,18 @@ export default class Api {
      return fetch(`https://mesto.nomoreparties.co/v1/cohort-24/cards/${cardId}`, {
       method: 'DELETE',
       headers: {
-          authorization: this._token,
-          'Content-Type': 'application/json'
+        authorization: this._token,
+          // 'Content-Type': 'application/json'
       },
     })
-    // .then(res => {
-    //   console.log(res)
-    //   return this._checkResult(res)
-    // })
-    // .then(res =>{
-    //   return this._changeToJson(res)
-    // })
-    // card.remove()
+    .then(res => {
+      
+      return this._checkResult(res)
+    })
+    .then(res =>{
+      return this._changeToJson(res)
+    })
+    
   }
 
 
@@ -139,6 +137,7 @@ export default class Api {
         'Content-Type': 'application/json'
     },})
     .then(res => {
+      // console.log(this._token)
      return this._checkResult(res)
     })
     .then(res =>{

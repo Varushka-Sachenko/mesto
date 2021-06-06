@@ -138,7 +138,7 @@ function addNewAvatar (data) {
 
 
 function deleteThisCard (cardId, card){
-  const popupDeleteCard = new PopupDeleteCard('.popup_delete-card', classApi.deleteCard, cardId, card);
+  const popupDeleteCard = new PopupDeleteCard('.popup_delete-card', classApi.deleteCard, cardId, card, classApi);
   popupDeleteCard.open()
   popupDeleteCard.setEventListeners()
   // classApi.deleteCard(cardId)
@@ -147,14 +147,14 @@ function deleteThisCard (cardId, card){
 function likeThisCard (card) {
   
   if(card.isLiked()) {
-    console.log('unlike')
+    
     classApi.unlikeCard(this.getCardId())
       .then(data => card.setLikesInfo(data))
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
       });
   } else {
-    console.log('like')
+    // console.log('like')
     classApi.likeCard(this.getCardId())
       .then(data => card.setLikesInfo(data))
       .catch((err) => {

@@ -46,11 +46,12 @@ class Card {
 	} 
 
 	isLiked() {
+		// console.log(this._cardLikes)
 		return this._cardLikes.some(item => item._id === this._owner);
 	} 
 
 	setLikesInfo(data) {
-		console.log(data)
+		// console.log(data)
 		this._cardLikes = data.likes;
 		this._counter.textContent = data.likes.length;
 		this._likeButton.classList.toggle('element__like-button_active');
