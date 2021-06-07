@@ -1,6 +1,6 @@
 import PopupDeleteCard from './PopupDeleteCard.js'
 class Card {  
-	constructor(data, cardSelector, openPopup, deleteCard, userId, likeCard, handleCardClick) { 
+	constructor(data, cardSelector, deleteCard, userId, likeCard, handleCardClick) { 
 	    this._title = data.name; 
 		this._likeCard = likeCard   
 	    this._link = data.link;    
@@ -8,13 +8,15 @@ class Card {
 		this._owner = data.owner._id
 		this._handleCardClick = handleCardClick;
 		this._cardSelector = cardSelector;  
-		this.openPopup = openPopup
 		this._userId = userId;
 		this._cardLikes = data.likes
 		this._deleteCard = deleteCard
 		this._element = document.querySelector(this._cardSelector).content.querySelector('.element').cloneNode(true);
 		this._deleteButton = this._element.querySelector('.element__delete-button')
 		this._likeButton = this._element.querySelector('.element__like-button')
+	}
+	removeCard(){
+		this._element.remove();
 	}
 
 
@@ -66,7 +68,7 @@ class Card {
 		
 		this._deleteButton.addEventListener('click', (evt) => {
 			const card = evt.target.closest('.element')
-			this._deleteCard(this._cardId, this)
+			this._deleteCard(this)
 
 		});
   

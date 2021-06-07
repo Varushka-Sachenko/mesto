@@ -97,16 +97,13 @@ Promise.all([classApi.loadUserInfo(), classApi.getInitialCards()])
     console.log(err); // выведем ошибку в консоль
   });
 
-function clickCardImage (link, title){
-  popupImage.open(link, title)
-}
 
-function openImagePopup (link, title){
-  const popupImage = new PopupWithImage('.image-popup')
-  popupImage.open(link, title)
-  popupImage.setEventListeners()
-
-}
+  const popupImage = new PopupWithImage('.image-popup');
+  popupImage.setEventListeners();
+  
+  function openImagePopup (link, title){
+    popupImage.open(link, title);
+  } 
 
 //Редактировать профиль
 function editProfileSubmitHandler(data) {
@@ -137,11 +134,25 @@ function addNewAvatar (data) {
 //Открыть добавление
 
 
-function deleteThisCard (cardId, card){
-  const popupDeleteCard = new PopupDeleteCard('.popup_delete-card', classApi.deleteCard, cardId, card, classApi);
+
+const popupDeleteCard = new PopupDeleteCard('.popup_delete-card', () => true);
+popupDeleteCard.setEventListeners();
+
+function removeCard (card){
   popupDeleteCard.open()
-  popupDeleteCard.setEventListeners()
-  // classApi.deleteCard(cardId)
+  popupDeleteCard.changeSubmit(deleteThisCard)
+  popupDeleteCard.card = card
+}
+
+function deleteThisCard(card) {
+  classApi.deleteCard(card.getCardId())
+    .then(() => {
+      card.removeCard();
+      popupDeleteCard.close();
+    }) 
+    .catch((err) => {
+      console.log(err); // выведем ошибку в консоль
+    });
 }
 
 function likeThisCard (card) {
@@ -165,7 +176,7 @@ function likeThisCard (card) {
 
 
 function createCard(data) {
-	const card = new Card(data, '.template', clickCardImage, deleteThisCard, userId, likeThisCard, openImagePopup)
+	const card = new Card(data, '.template', removeCard, userId, likeThisCard, openImagePopup)
 	const cardElement= card.generateCard()
 	return cardElement
 }
